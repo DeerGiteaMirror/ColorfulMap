@@ -2,6 +2,8 @@
 
 开源地址：[Gitea](https://ssl.lunadeer.cn:14446/zhangyuheng/ColorfulMap)
 
+文档地址：[Doc](https://ssl.lunadeer.cn:14448/doc/26/)
+
 ## 简介
 
 ![](https://ssl.lunadeer.cn:14437/i/2024/02/21/65d5e0d10b7d5.png)
