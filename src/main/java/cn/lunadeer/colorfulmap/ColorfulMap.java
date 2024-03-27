@@ -20,6 +20,8 @@ public final class ColorfulMap extends JavaPlugin {
 
         new MapManager().init();
 
+        Metrics metrics = new Metrics(this, 21443);
+
         XLogger.info("ColorfulMap 已加载");
         XLogger.info("版本: " + getPluginMeta().getVersion());
         // https://patorjk.com/software/taag/#p=display&f=Big&t=ColorfulMap
