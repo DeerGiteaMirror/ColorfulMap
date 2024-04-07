@@ -1,6 +1,6 @@
 # ColorfulMap
 
-### 开源地址：[Gitea](https://ssl.lunadeer.cn:14446/zhangyuheng/ColorfulMap) | 文档地址：[Doc](https://ssl.lunadeer.cn:14448/doc/26/)
+### [开源地址](https://ssl.lunadeer.cn:14446/zhangyuheng/ColorfulMap) | [文档地址](https://ssl.lunadeer.cn:14448/doc/26/)
 ### [下载页面](https://ssl.lunadeer.cn:14446/zhangyuheng/ColorfulMap/releases)
 ### [统计页面](https://bstats.org/plugin/bukkit/ColorfulMap/21443) | [Hangar](https://hangar.papermc.io/zhangyuheng/ColorfulMap)
 
