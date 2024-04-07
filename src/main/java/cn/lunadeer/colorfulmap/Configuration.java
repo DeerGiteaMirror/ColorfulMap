@@ -17,6 +17,7 @@ public class Configuration {
         _debug = _file.getBoolean("Debug", false);
         _max_frame_x = _file.getInt("MaxFrameX", 32);
         _max_frame_y = _file.getInt("MaxFrameY", 18);
+        _check_update = _file.getBoolean("CheckUpdate", true);
     }
 
     public Boolean isDebug() {
@@ -49,9 +50,14 @@ public class Configuration {
         _plugin.saveConfig();
     }
 
+    public Boolean isCheckUpdate() {
+        return _check_update;
+    }
+
     private final ColorfulMap _plugin;
     private FileConfiguration _file;
     private Boolean _debug;
     private Integer _max_frame_x;
     private Integer _max_frame_y;
+    private Boolean _check_update;
 }

@@ -2,4 +2,6 @@ MaxFrameX: 32
 
 MaxFrameY: 18
 
+CheckUpdate: true
+
 Debug: false

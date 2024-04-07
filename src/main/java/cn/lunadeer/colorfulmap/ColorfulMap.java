@@ -1,6 +1,7 @@
 package cn.lunadeer.colorfulmap;
 
 import cn.lunadeer.colorfulmap.commands.ToMap;
+import cn.lunadeer.colorfulmap.utils.GiteaReleaseCheck;
 import cn.lunadeer.colorfulmap.utils.XLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +22,12 @@ public final class ColorfulMap extends JavaPlugin {
         new MapManager().init();
 
         Metrics metrics = new Metrics(this, 21443);
+        if (config.isCheckUpdate()) {
+            giteaReleaseCheck = new GiteaReleaseCheck(this,
+                    "https://ssl.lunadeer.cn:14446",
+                    "zhangyuheng",
+                    "ColorfulMap");
+        }
 
         XLogger.info("ColorfulMap 已加载");
         XLogger.info("版本: " + getPluginMeta().getVersion());
@@ -43,4 +50,5 @@ public final class ColorfulMap extends JavaPlugin {
 
     public static ColorfulMap instance;
     public static Configuration config;
+    private GiteaReleaseCheck giteaReleaseCheck;
 }
