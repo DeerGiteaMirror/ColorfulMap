@@ -8,3 +8,8 @@ commands:
   tomap:
     description: 将图片转换为地图画
     usage: /tomap <图片url> [缩放比例(默认1)]
+    permission: colorfulmap.tomap
+permissions:
+  colorfulmap.tomap:
+    description: 允许使用/tomap命令
+    default: true
