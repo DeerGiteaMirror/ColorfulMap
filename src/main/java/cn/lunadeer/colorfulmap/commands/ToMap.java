@@ -1,9 +1,8 @@
 package cn.lunadeer.colorfulmap.commands;
 
-import cn.lunadeer.colorfulmap.ColorfulMap;
 import cn.lunadeer.colorfulmap.generator.Multi;
 import cn.lunadeer.colorfulmap.utils.Notification;
-import cn.lunadeer.colorfulmap.utils.Time;
+import cn.lunadeer.colorfulmap.utils.Scheduler;
 import cn.lunadeer.colorfulmap.utils.XLogger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -46,14 +45,8 @@ public class ToMap implements CommandExecutor {
                 return true;
             }
         }
-//        ItemStack mapImage = Multi.generate(player, url, scale);
-//        if (mapImage == null){
-//            Notification.error(player, "生成地图失败");
-//            return true;
-//        }
-//        player.getInventory().addItem(mapImage);
         float finalScale = scale;
-        Time.runAsync(ColorfulMap.instance, () -> {
+        Scheduler.runTaskAsync(() -> {
                     ItemStack mapImage = Multi.generate(player, url, finalScale);
                     if (mapImage == null) {
                         Notification.error(player, "生成地图失败");

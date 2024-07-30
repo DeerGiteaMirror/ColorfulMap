@@ -1,5 +1,11 @@
 package cn.lunadeer.colorfulmap.utils;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,9 +18,9 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
-public class GiteaReleaseCheck {
+public class GiteaReleaseCheck implements Listener {
     private static class GiteaRelease {
         public String tag_name;
         public String message;
@@ -22,19 +28,23 @@ public class GiteaReleaseCheck {
         public String download_url;
     }
 
+    private static GiteaReleaseCheck instance = null;
+
     public GiteaReleaseCheck(JavaPlugin plugin, String giteaServer, String owner, String repo) {
+        instance = this;
         this.gitea_server = giteaServer;
         this.owner = owner;
         this.repo = repo;
         this.plugin = plugin;
-        this.current_version = plugin.getPluginMeta().getVersion();
+        this.current_version = plugin.getDescription().getVersion();
+        this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
         // 异步每12小时检查一次更新
-        plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, (instance) -> {
+        Scheduler.runTaskRepeatAsync(() -> {
             getLatestRelease();
             if (auto_update) {
                 downloadUpdate();
             }
-        }, 10, 60 * 60 * 12, TimeUnit.SECONDS);
+        }, (10 + new Random().nextInt(10)) * 20, (60 * 60 * 12 + new Random().nextInt(60)) * 20);
     }
 
     public void enableAutoUpdate() {
@@ -169,11 +179,24 @@ public class GiteaReleaseCheck {
         }
     }
 
-    private String gitea_server;
-    private String owner;
-    private String repo;
-    private JavaPlugin plugin;
-    private String current_version;
+    @EventHandler
+    private void onPlayerJoin(PlayerJoinEvent event) {
+        if (!event.getPlayer().isOp()) {
+            return;
+        }
+        Player player = event.getPlayer();
+        if (latest_release != null && isNewVersion(current_version, latest_release.tag_name)) {
+            Notification.info(player, "发现新版本：" + latest_release.tag_name + " 详细内容请查看控制台或点击下方链接");
+            Component download = Component.text(latest_release.html_url).clickEvent(ClickEvent.openUrl(latest_release.html_url)).hoverEvent(Component.text("点击打开"));
+            Notification.info(player,download);
+        }
+    }
+
+    private final String gitea_server;
+    private final String owner;
+    private final String repo;
+    private final JavaPlugin plugin;
+    private final String current_version;
     private GiteaRelease latest_release = null;
     private boolean auto_update = false;
 

@@ -2,6 +2,10 @@ MaxFrameX: 32
 
 MaxFrameY: 18
 
+Economy:
+  Enable: false
+  CostPerMap: 100.0
+
 CheckUpdate: true
 
 Debug: false

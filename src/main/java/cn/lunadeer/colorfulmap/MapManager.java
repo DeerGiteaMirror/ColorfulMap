@@ -16,9 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class MapManager implements Listener {
 
@@ -40,7 +38,7 @@ public class MapManager implements Listener {
     public void init() {
         MapManager.instance = this;
         Bukkit.getPluginManager().registerEvents(this, ColorfulMap.instance);
-        loadImages();
+        reloadImages();
     }
 
 
@@ -86,8 +84,9 @@ public class MapManager implements Listener {
     /***
      * Loads images from data file to HashMap.
      */
-    private void loadImages() {
+    public void reloadImages() {
         FileConfiguration config = dataFile.getConfig();
+        List<String> recordToDelete = new ArrayList<>();
         for (String world : config.getKeys(false)) {
             for (String id : Objects.requireNonNull(config.getConfigurationSection(world)).getKeys(false)) {
                 String path = config.getString(world + "." + id);
@@ -96,7 +95,8 @@ public class MapManager implements Listener {
                 }
                 BufferedImage image = StorageMaps.load(path);
                 if (image == null) {
-                    XLogger.err("无法加载图片: " + path);
+                    XLogger.err("无法加载图片: %s 已移除记录", path);
+                    recordToDelete.add(world + "." + id);
                     continue;
                 }
                 if (!savedImages.containsKey(world)) {
@@ -105,6 +105,11 @@ public class MapManager implements Listener {
                 savedImages.get(world).put(Integer.parseInt(id), image);
             }
         }
+        // 删除无效记录
+        for (String record : recordToDelete) {
+            config.set(record, null);
+        }
+        dataFile.saveConfig();
     }
 
 

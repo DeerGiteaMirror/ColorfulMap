@@ -9,7 +9,14 @@ commands:
     description: 将图片转换为地图画
     usage: /tomap <图片url> [缩放比例(默认1)]
     permission: colorfulmap.tomap
+  reloadColorfulMap:
+    description: 重载ColorfulMap配置
+    usage: /reloadColorfulMap
+    permission: colorfulmap.reload
 permissions:
   colorfulmap.tomap:
     description: 允许使用/tomap命令
     default: true
+  colorfulmap.reload:
+    description: 允许使用/reloadColorfulMap命令
+    default: op

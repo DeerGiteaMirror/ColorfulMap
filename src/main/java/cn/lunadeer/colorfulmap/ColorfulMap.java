@@ -1,8 +1,8 @@
 package cn.lunadeer.colorfulmap;
 
+import cn.lunadeer.colorfulmap.commands.Reload;
 import cn.lunadeer.colorfulmap.commands.ToMap;
-import cn.lunadeer.colorfulmap.utils.GiteaReleaseCheck;
-import cn.lunadeer.colorfulmap.utils.XLogger;
+import cn.lunadeer.colorfulmap.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,13 +15,19 @@ public final class ColorfulMap extends JavaPlugin {
         // Plugin startup logic
         instance = this;
         config = new Configuration(this);
+        new XLogger(this);
+        XLogger.setDebug(config.isDebug());
+        new Notification(this);
+        new Scheduler(this);
 
         Objects.requireNonNull(Bukkit.getPluginCommand("tomap")).setExecutor(new ToMap());
+        Objects.requireNonNull(Bukkit.getPluginCommand("reloadColorfulMap")).setExecutor(new Reload());
+
         Bukkit.getPluginManager().registerEvents(new Events(), this);
 
         new MapManager().init();
 
-        Metrics metrics = new Metrics(this, 21443);
+        bStatsMetrics metrics = new bStatsMetrics(this, 21443);
         if (config.isCheckUpdate()) {
             giteaReleaseCheck = new GiteaReleaseCheck(this,
                     "https://ssl.lunadeer.cn:14446",
@@ -30,7 +36,7 @@ public final class ColorfulMap extends JavaPlugin {
         }
 
         XLogger.info("ColorfulMap 已加载");
-        XLogger.info("版本: " + getPluginMeta().getVersion());
+        XLogger.info("版本: " + this.getDescription().getVersion());
         // https://patorjk.com/software/taag/#p=display&f=Big&t=ColorfulMap
         XLogger.info("   _____      _             __       _ __  __");
         XLogger.info("  / ____|    | |           / _|     | |  \\/  |");
