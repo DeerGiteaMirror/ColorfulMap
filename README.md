@@ -58,7 +58,7 @@
 
 ## 管理员指南
 
-## 指令 & 权限节点
+### 指令 & 权限节点
 
 > 以下指令中尖括号 `<>` 表示必填，方括号 `[]` 表示选填。
 
@@ -67,13 +67,13 @@
 | 生成地图画 | `/tomap <图片地址> [缩放倍率]` | colorfulmap.tomap  | true |
 | 重载配置  | `/reloadColorfulMap`   | colorfulmap.reload | op   |
 
-## 如何查图
+### 如何查图
 
 2.0版本开始地图画会保存一份玩家获取图片的原图，路径为 `plugins/ColorfulMap/maps/{图片uuid}/raw.png` ，方便服主快速查阅图片内容。
 
 当玩家放置地图后还会同时保存一份元数据文件，`plugins/ColorfulMap/maps/{图片uuid}/meta.txt`，此文件记录了放置地图的玩家、放置时间、地图画的位置等信息。
 
-## 配置文件参考
+### 配置文件参考
 
 ```yaml
 MaxFrameX: 32
