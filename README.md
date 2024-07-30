@@ -31,7 +31,7 @@
 
 ## 支持版本
 
-- 1.20.1+ (Spigot、Paper、Folia)
+- 1.20.1+ (Paper、Folia)
 
 ## 安装方法
 
