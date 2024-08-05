@@ -76,15 +76,21 @@
 ### 配置文件参考
 
 ```yaml
+# 地图画阵列的最大尺寸 宽
 MaxFrameX: 32
 
+# 地图画阵列的最大尺寸 高
 MaxFrameY: 18
 
-CheckUpdate: true
-
+# 是否启用经济系统 消耗玩家金钱生成地图画
 Economy:
    Enable: false
-   CostPerMap: 100.0
+   CostPerMap: 100.0  # 每张地图画的单价 - 3*3的地图画需要9张地图画 也就是 9*100 = 900
+
+# 图床地址白名单，不在白名单中的图床将无法使用，留空表示不启用地址白名单
+AddressWhiteList: []
+
+CheckUpdate: true
 
 Debug: false
 ```

@@ -4,6 +4,7 @@ import cn.lunadeer.colorfulmap.ColorfulMap;
 import cn.lunadeer.colorfulmap.StorageMaps;
 import cn.lunadeer.colorfulmap.utils.ImageTool;
 import cn.lunadeer.colorfulmap.utils.Notification;
+import cn.lunadeer.colorfulmap.utils.UrlTools;
 import cn.lunadeer.colorfulmap.utils.VaultConnect.VaultConnect;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -24,6 +25,10 @@ public class Multi {
 
     public static ItemStack generate(Player player, String url, Float scale) {
         try {
+            if (!UrlTools.isInWhiteList(url)) {
+                Notification.error(player, "无法生成地图画: 此图床地址不被允许使用");
+                return null;
+            }
             URL _url = new URL(url);
             BufferedImage raw_image = ImageIO.read(_url);
             BufferedImage resized_image;

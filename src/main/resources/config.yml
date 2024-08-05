@@ -6,6 +6,8 @@ Economy:
   Enable: false
   CostPerMap: 100.0
 
+AddressWhiteList: []
+
 CheckUpdate: true
 
 Debug: false

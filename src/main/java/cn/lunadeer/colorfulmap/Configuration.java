@@ -4,6 +4,8 @@ import cn.lunadeer.colorfulmap.utils.VaultConnect.VaultConnect;
 import cn.lunadeer.colorfulmap.utils.XLogger;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.List;
+
 public class Configuration {
 
     public Configuration(ColorfulMap plugin) {
@@ -22,10 +24,12 @@ public class Configuration {
         _check_update = _file.getBoolean("CheckUpdate", true);
         _economy_enable = _file.getBoolean("Economy.Enable", false);
         _price = (float) _file.getDouble("Economy.CostPerMap", 100.0);
+        _address_white_list = _file.getStringList("AddressWhiteList");
         if (_economy_enable) {
             XLogger.info("已启用经济系统");
             new VaultConnect(_plugin);
         }
+        saveAll();
     }
 
     public void saveAll() {
@@ -35,6 +39,7 @@ public class Configuration {
         _file.set("CheckUpdate", _check_update);
         _file.set("Economy.Enable", _economy_enable);
         _file.set("Economy.CostPerMap", _price);
+        _file.set("AddressWhiteList", _address_white_list);
         _plugin.saveConfig();
     }
 
@@ -98,6 +103,16 @@ public class Configuration {
         _plugin.saveConfig();
     }
 
+    public List<String> getAddressWhiteList() {
+        return _address_white_list;
+    }
+
+    public void setAddressWhiteList(List<String> address_white_list) {
+        _address_white_list = address_white_list;
+        _file.set("AddressWhiteList", address_white_list);
+        _plugin.saveConfig();
+    }
+
     private final ColorfulMap _plugin;
     private FileConfiguration _file;
     private Boolean _debug;
@@ -106,4 +121,5 @@ public class Configuration {
     private Boolean _check_update;
     private Boolean _economy_enable;
     private Float _price;
+    private List<String > _address_white_list;
 }
