@@ -14,8 +14,8 @@ public final class ColorfulMap extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         instance = this;
-        config = new Configuration(this);
         new XLogger(this);
+        config = new Configuration(this);
         XLogger.setDebug(config.isDebug());
         new Notification(this);
         new Scheduler(this);
