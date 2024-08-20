@@ -18,9 +18,7 @@
 
 ## 说明
 
-本插件大约相当于 [ImageFrame](https://github.com/LOOHP/ImageFrame)
-的简版以及 [ImageMaps](https://github.com/SydMontague/ImageMaps) 的高版本重制版。前者功能丰富，不过可能由于项目体量较大，对于新版本的兼容较慢，后者在
-1.18 开始就停止了更新，切不支持 Folia 核心。
+本插件大约相当于 [ImageFrame](https://github.com/LOOHP/ImageFrame)的简版以及 [ImageMaps](https://github.com/SydMontague/ImageMaps) 的高版本重制版。前者功能丰富，不过可能由于项目体量较大，对于新版本的兼容较慢，后者在1.18 开始就停止了更新，且不支持 Folia 核心。
 
 ## 功能介绍
 
