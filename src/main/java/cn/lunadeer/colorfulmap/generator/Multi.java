@@ -31,6 +31,10 @@ public class Multi {
             }
             URL _url = new URL(url);
             BufferedImage raw_image = ImageIO.read(_url);
+            if (raw_image == null) {
+                Notification.error(player, "无法读取有效图片，请检查图片地址是否正确或者更换图床");
+                return null;
+            }
             BufferedImage resized_image;
             if (scale != 1.0) {
                 resized_image = ImageTool.resize(raw_image, scale);
