@@ -124,19 +124,18 @@ public class StorageMaps {
             if (files == null) {
                 return;
             }
-            if (files.length == 0) {
+            List<String> filenames = new ArrayList<>();
+            for (File file : files) {
+                filenames.add(file.getName());
+            }
+            if (filenames.isEmpty()) {
                 map_folder.delete();
                 continue;
             }
-            if (files.length == 3) {
-                for (File file : files) {
-                    if (!file.getName().equals("meta.txt") && !file.getName().equals("raw.png") && !file.getName().equals("thumb.png")) {
-                        return;
-                    }
-                }
-                for (File file : files) {
-                    file.delete();
-                }
+            if (!filenames.contains("meta.txt")) {
+                continue;
+            }
+            if (files.length == 3 && filenames.contains("raw.png") && filenames.contains("thumb.png") && filenames.contains("meta.txt")) {
                 map_folder.delete();
             }
         }
