@@ -1,5 +1,6 @@
 package cn.lunadeer.colorfulmap;
 
+import cn.lunadeer.colorfulmap.commands.Purge;
 import cn.lunadeer.colorfulmap.commands.Reload;
 import cn.lunadeer.colorfulmap.commands.ToMap;
 import cn.lunadeer.colorfulmap.utils.*;
@@ -22,6 +23,7 @@ public final class ColorfulMap extends JavaPlugin {
 
         Objects.requireNonNull(Bukkit.getPluginCommand("tomap")).setExecutor(new ToMap());
         Objects.requireNonNull(Bukkit.getPluginCommand("reloadColorfulMap")).setExecutor(new Reload());
+        Objects.requireNonNull(Bukkit.getPluginCommand("purgeColorfulMap")).setExecutor(new Purge());
 
         Bukkit.getPluginManager().registerEvents(new Events(), this);
 

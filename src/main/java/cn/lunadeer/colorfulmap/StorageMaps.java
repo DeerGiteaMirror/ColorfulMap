@@ -110,4 +110,35 @@ public class StorageMaps {
             return null;
         }
     }
+
+    public static void purgeStorageFolder() {
+        File[] map_folders = new File(data_folder, "maps").listFiles();
+        if (map_folders == null) {
+            return;
+        }
+        for (File map_folder : map_folders) {
+            if (!map_folder.isDirectory()) {
+                continue;
+            }
+            File[] files = map_folder.listFiles();
+            if (files == null) {
+                return;
+            }
+            if (files.length == 0) {
+                map_folder.delete();
+                continue;
+            }
+            if (files.length == 3) {
+                for (File file : files) {
+                    if (!file.getName().equals("meta.txt") && !file.getName().equals("raw.png") && !file.getName().equals("thumb.png")) {
+                        return;
+                    }
+                }
+                for (File file : files) {
+                    file.delete();
+                }
+                map_folder.delete();
+            }
+        }
+    }
 }

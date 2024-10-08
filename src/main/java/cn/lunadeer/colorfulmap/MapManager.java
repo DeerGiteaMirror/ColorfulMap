@@ -122,6 +122,27 @@ public class MapManager implements Listener {
         return savedImages.get(world_name.getName()).get(id);
     }
 
+    public List<Integer> getMapIds(World world) {
+        if (!savedImages.containsKey(world.getName())) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(savedImages.get(world.getName()).keySet());
+    }
+
+    public void removeMap(World world, Integer id) {
+        if (!savedImages.containsKey(world.getName())) {
+            return;
+        }
+        FileConfiguration config = dataFile.getConfig();
+        String path = config.getString(world.getName() + "." + id);
+        if (path == null) {
+            return;
+        }
+        new File(path).delete();
+        config.set(world.getName() + "." + id, null);
+        dataFile.saveConfig();
+        savedImages.get(world.getName()).remove(id);
+    }
 
     static class MapsFile {
 
